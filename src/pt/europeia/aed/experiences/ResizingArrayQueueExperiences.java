@@ -118,7 +118,7 @@ public class ResizingArrayQueueExperiences {
         }
         long repetitions = 0;
         ArrayList<ResizingArrayQueue<String>> resizingArrayQueues = new ArrayList<>();
-        for (int i = 0; i < Math.ceil(numberArrays / limit); i++) {
+        for (int i = 0; i < Math.ceil(numberArrays / (Math.sqrt(limit))); i++) {
             ResizingArrayQueue<String> resizingArrayQueue = new ResizingArrayQueue<>();
             resizingArrayQueues.add(resizingArrayQueue);
         }
@@ -135,14 +135,9 @@ public class ResizingArrayQueueExperiences {
         if (!isWarmup) {
             out.println("Position: " + limit + "\t" + "Median: " + median + "\t" + "Repetition: " + repetitions + "\t" + "minimum: " + executionTimes.get(0) +
                     "\t" + "Maximum: " + executionTimes.get(executionTimes.size() - 1));
-            excel.writeDataTimes(limit, median, executionTimes.get(0));
+            excel.writeDataTimes(limit, median, executionTimes.get(0), repetitions);
+
         }
-        /*-
-        out.println("Sum from 1 to " + limit + " = " + sum + " [" + median
-                + "s median time based on " + repetitions
-                + " repetitions of " + contiguousRepetitions
-                + " contiguous repetitions]");
-        */
     }
 
     public static void main(final String[] arguments)
@@ -153,7 +148,6 @@ public class ResizingArrayQueueExperiences {
         // Warm up (this attempts to force the JIT compiler to do its work
         // before the experiments actually begin):
         Excel rezisingArrayExcel = new Excel("RezisingArray", "MelhorCaso");
-        performExperimentsFor(3, false, rezisingArrayExcel);
         for (int exponent = 0, limit = 1; exponent != 8; exponent++, limit *= 2) {
             performExperimentsFor(limit, true, rezisingArrayExcel);
         }
@@ -161,16 +155,13 @@ public class ResizingArrayQueueExperiences {
         // The actual experiments are performed here, with limits going from 1
         // to 2^30:
         System.out.println("Melhor Caso");
-        for (int exponent = 0, limit = 1; exponent != 25; exponent++, limit *= 2) {
+        for (int exponent = 0, limit = 1; exponent != 20; exponent++, limit *= 2) {
             performExperimentsFor(limit, false, rezisingArrayExcel);
         }
-        for (int exponent = 0, limit = 1; exponent != 8; exponent++, limit *= 2) {
-            performExperimentsFor(limit + 1, true, rezisingArrayExcel);
+        for (int exponent = 0, limit = 1; exponent != 20; exponent++, limit = (limit*2)) {
+            performExperimentsFor(limit+1, false, rezisingArrayExcel);
         }
-        System.out.println("Pior Caso");
-        for (int exponent = 0, limit = 1; exponent != 25; exponent++, limit *= 2) {
-            performExperimentsFor(limit + 1, false, rezisingArrayExcel);
-        }
+
         rezisingArrayExcel.close();
     }
 }

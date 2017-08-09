@@ -46,9 +46,9 @@ public class Excel {
     }
 
 
-    public void writeDataTimes(int value, double median, double minimum) {
+    public void writeDataTimes(int value, double median, double minimum, double repetition) {
         numberRow++;
-        Double doubleOfData[] = {(double) value, median, minimum};
+        Double doubleOfData[] = {(double) value, median, minimum, repetition};
         data.put(numberRow, doubleOfData);
         Set<Integer> keyid = data.keySet();
 
