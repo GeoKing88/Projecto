@@ -110,7 +110,7 @@ public class SumExecutionTimeTester {
     }
 
     // Used to store the results of the sums, so that the Java compiler does not
-    // optimize away our calls to sumFrom1To() (this variable is used when
+    // optimize away our calls to runnable() (this variable is used when
     // showing the experimental results, so we don't get warnings
     // about unused variables):
     private static long sum;

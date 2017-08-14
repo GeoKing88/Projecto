@@ -1,4 +1,4 @@
-package pt.europeia.aed.excel;
+package pt.europeia.aed.files;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -24,7 +24,7 @@ public class Excel {
 
     /**
      * @param nameFile       - The name of the file that will contain the data.
-     * @param nameFirstSheet - The name where will be the first sheet of the excel File
+     * @param nameFirstSheet - The name where will be the first sheet of the files File
      *                       <p>
      *                       <p>
      *                       This method is the constructor of the class Excel. It receive two parameters: The nameFile and nameFirstSheet. Both are Strings.
@@ -66,7 +66,7 @@ public class Excel {
     }
 
     /**
-     * This method are for the close of the excel file. This must be used when all the data are written in the file at the end.
+     * This method are for the close of the files file. This must be used when all the data are written in the file at the end.
      * The user must use this method to not lose all the data.
      * s
      */
