@@ -7,6 +7,7 @@ public final class Quick {
         StdRandom.shuffle(values);
 
         sort(values, 0, values.length - 1);
+
     }
 
     private static void sort(final double[] values, final int first,

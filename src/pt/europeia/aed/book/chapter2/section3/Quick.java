@@ -4,11 +4,12 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
-public final class Quick {
+public final class Quick{
 
     private Quick() {
         throw new RuntimeException("Attempt to instantiate package-class");
     }
+
 
     public static <Item extends Comparable<? super Item>> void sort(
             final Item[] values) {
@@ -19,6 +20,8 @@ public final class Quick {
         assert isIncreasing(
                 values) : "Array should be increasing after sorting.";
     }
+
+
 
     private static <Item extends Comparable<? super Item>> void sort(
             final Item[] values, final int first, final int last) {
@@ -32,6 +35,7 @@ public final class Quick {
         assert isIncreasing(values, first,
                 last) : "Array segment should be increasing after sorting.";
     }
+
 
     private static <Item extends Comparable<? super Item>> int partition(
             final Item[] values, final int first, final int last) {

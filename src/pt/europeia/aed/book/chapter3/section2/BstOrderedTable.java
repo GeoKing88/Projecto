@@ -1,9 +1,11 @@
 package pt.europeia.aed.book.chapter3.section2;
 
+import edu.princeton.cs.algs4.BST;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
@@ -30,6 +32,13 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
 
         checkInvariant();
     }
+
+    public BstOrderedTable(BstOrderedTable<Key, Value> bstOrderedTable) {
+        root = bstOrderedTable.root;
+
+        checkInvariant();
+    }
+
 
     public int size() {
         checkInvariant();
@@ -223,22 +232,22 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
             return null;
 
         final int comparison = key.compareTo(tree.key);
-        
+
         if (comparison < 0)
             return valueFor(key, tree.left);
         if (comparison > 0)
             return valueFor(key, tree.right);
-        
+
         return tree.value;
     }
 
     private Node<Key, Value> putIn(final Key key, final Value value,
-            final Node<Key, Value> tree) {
+                                   final Node<Key, Value> tree) {
         if (tree == null)
             return new Node<Key, Value>(key, value);
 
         final int comparison = key.compareTo(tree.key);
-        
+
         if (comparison < 0)
             tree.left = putIn(key, value, tree.left);
         else if (comparison > 0)
@@ -256,7 +265,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
             return null;
 
         final int comparison = key.compareTo(tree.key);
-        
+
         if (comparison < 0)
             tree.left = deleteFrom(key, tree.left);
         else if (comparison > 0)
@@ -309,7 +318,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
     }
 
     private Node<Key, Value> nodeWithRankIn(final int rank,
-            final Node<Key, Value> tree) {
+                                            final Node<Key, Value> tree) {
         if (tree == null)
             return null;
 
@@ -325,7 +334,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
     }
 
     private Node<Key, Value> floorNodeOf(final Key key,
-            final Node<Key, Value> tree) {
+                                         final Node<Key, Value> tree) {
         if (tree == null)
             return null;
 
@@ -338,15 +347,15 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
             return floorNodeOf(key, tree.left);
 
         final Node<Key, Value> floorNode = floorNodeOf(key, tree.right);
-        
+
         if (floorNode != null)
             return floorNode;
-        
+
         return tree;
     }
 
     private Node<Key, Value> ceilingNodeOf(final Key key,
-            final Node<Key, Value> tree) {
+                                           final Node<Key, Value> tree) {
         if (tree == null)
             return null;
 
@@ -359,7 +368,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
             return ceilingNodeOf(key, tree.right);
 
         final Node<Key, Value> ceilingNode = ceilingNodeOf(key, tree.left);
-        
+
         if (ceilingNode != null)
             return ceilingNode;
 
@@ -367,7 +376,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
     }
 
     private void enqueueKeysInRange(final Queue<Key> keys, final Key low,
-            final Key high, final Node<Key, Value> tree) {
+                                    final Key high, final Node<Key, Value> tree) {
         if (tree == null)
             return;
 
@@ -424,7 +433,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
     }
 
     private boolean isBstBetween(final Node<Key, Value> tree,
-            final Key minimum, final Key maximum) {
+                                 final Key minimum, final Key maximum) {
         if (tree == null)
             return true;
 
@@ -466,7 +475,7 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
                 if (key.compareTo(nodeWithRankIn(rankOf(key, root), root).key) != 0)
                     return false;
         }
-        
+
         return true;
     }
 

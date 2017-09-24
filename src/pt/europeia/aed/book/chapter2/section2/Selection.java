@@ -2,7 +2,7 @@ package pt.europeia.aed.book.chapter2.section2;
 
 import java.util.Comparator;
 
-public final class Selection {
+public final class Selection{
 
     private Selection() {
         throw new RuntimeException("Attempt to instantiate package-class");

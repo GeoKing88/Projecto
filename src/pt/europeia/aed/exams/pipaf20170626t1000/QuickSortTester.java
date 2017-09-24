@@ -7,7 +7,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import java.util.Arrays;
 
 public class QuickSortTester {
-
+/**
     public static void main(final String[] arguments) {
         final int numberOfRepetions = 10000;
 
@@ -40,7 +40,7 @@ public class QuickSortTester {
 
         return values;
     }
-
+**/
 }
 
 /*

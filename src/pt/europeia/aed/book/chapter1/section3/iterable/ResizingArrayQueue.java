@@ -24,7 +24,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
         numberOfChanges++;
     }
 
-    public ResizingArrayQueue(ResizingArrayQueue resizingArrayQueue){
+    public ResizingArrayQueue(ResizingArrayQueue resizingArrayQueue) {
         items = (Item[]) resizingArrayQueue.items;
         size = resizingArrayQueue.size;
         head = resizingArrayQueue.head;
@@ -73,13 +73,12 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
             changeCapacityTo(items.length / 2);
 
         numberOfChanges++;
-        
+
         return item;
     }
 
     private void changeCapacityTo(final int newCapacity) {
-        @SuppressWarnings("unchecked")
-        final Item[] copyOfItems = (Item[]) new Object[newCapacity];
+        @SuppressWarnings("unchecked") final Item[] copyOfItems = (Item[]) new Object[newCapacity];
 
         for (int i = 0; i != size; i++)
             copyOfItems[i] = items[(head + i) % items.length];
@@ -115,7 +114,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
                 throw new NoSuchElementException("No more items in iteration.");
 
             final Item item = items[(head + current) % items.length];
-            
+
             current++;
 
             return item;
@@ -135,6 +134,9 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
         }
     }
 
+    public Item[] getItems() {
+        return items;
+    }
 }
 
 /*
