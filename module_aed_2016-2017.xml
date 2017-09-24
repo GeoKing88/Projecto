@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_aed_2016-2017" default="compile.module.aed_2016-2017">
+  <dirname property="module.aed_2016-2017.basedir" file="${ant.file.module_aed_2016-2017}"/>
+  
+  <property name="module.jdk.home.aed_2016-2017" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.aed_2016-2017" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.aed_2016-2017" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.aed_2016-2017" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="aed_2016-2017.output.dir" value="${module.aed_2016-2017.basedir}/bin"/>
+  <property name="aed_2016-2017.testoutput.dir" value="${module.aed_2016-2017.basedir}/bin"/>
+  
+  <path id="aed_2016-2017.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="aed_2016-2017.module.production.classpath">
+    <path refid="${module.jdk.classpath.aed_2016-2017}"/>
+    <pathelement location="${basedir}/lib/algs4.jar"/>
+    <pathelement location="${basedir}/lib/sizer.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-codec-1.10.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-collections4-4.1.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/curvesapi-1.04.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/junit-4.12.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/log4j-1.2.17.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-examples-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-excelant-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-schemas-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-scratchpad-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/xmlbeans-2.6.0.jar"/>
+  </path>
+  
+  <path id="aed_2016-2017.runtime.production.module.classpath">
+    <pathelement location="${aed_2016-2017.output.dir}"/>
+    <pathelement location="${basedir}/lib/algs4.jar"/>
+    <pathelement location="${basedir}/lib/sizer.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-codec-1.10.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-collections4-4.1.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/curvesapi-1.04.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/junit-4.12.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/log4j-1.2.17.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-examples-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-excelant-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-schemas-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-scratchpad-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/xmlbeans-2.6.0.jar"/>
+  </path>
+  
+  <path id="aed_2016-2017.module.classpath">
+    <pathelement location="${aed_2016-2017.output.dir}"/>
+    <path refid="${module.jdk.classpath.aed_2016-2017}"/>
+    <pathelement location="${basedir}/lib/algs4.jar"/>
+    <pathelement location="${basedir}/lib/sizer.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-codec-1.10.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-collections4-4.1.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/curvesapi-1.04.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/junit-4.12.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/log4j-1.2.17.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-examples-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-excelant-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-schemas-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-scratchpad-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/xmlbeans-2.6.0.jar"/>
+  </path>
+  
+  <path id="aed_2016-2017.runtime.module.classpath">
+    <pathelement location="${aed_2016-2017.output.dir}"/>
+    <pathelement location="${basedir}/lib/algs4.jar"/>
+    <pathelement location="${basedir}/lib/sizer.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-codec-1.10.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-collections4-4.1.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/curvesapi-1.04.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/junit-4.12.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/log4j-1.2.17.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-examples-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-excelant-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-ooxml-schemas-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/poi-scratchpad-3.15.jar"/>
+    <pathelement location="${basedir}/../../../Bibliotecas Externas/Apache POI/xmlbeans-2.6.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.aed_2016-2017">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.aed_2016-2017">
+    <patternset refid="excluded.from.module.aed_2016-2017"/>
+  </patternset>
+  
+  <path id="aed_2016-2017.module.sourcepath">
+    <dirset dir="${module.aed_2016-2017.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.aed_2016-2017" depends="compile.module.aed_2016-2017.production,compile.module.aed_2016-2017.tests" description="Compile module AED 2016-2017"/>
+  
+  <target name="compile.module.aed_2016-2017.production" depends="register.custom.compilers" description="Compile module AED 2016-2017; production classes">
+    <mkdir dir="${aed_2016-2017.output.dir}"/>
+    <javac2 destdir="${aed_2016-2017.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.aed_2016-2017}/javac">
+      <compilerarg line="${compiler.args.aed_2016-2017}"/>
+      <bootclasspath refid="aed_2016-2017.module.bootclasspath"/>
+      <classpath refid="aed_2016-2017.module.production.classpath"/>
+      <src refid="aed_2016-2017.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.aed_2016-2017"/>
+    </javac2>
+    
+    <copy todir="${aed_2016-2017.output.dir}">
+      <fileset dir="${module.aed_2016-2017.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.aed_2016-2017.tests" depends="register.custom.compilers,compile.module.aed_2016-2017.production" description="compile module AED 2016-2017; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.aed_2016-2017" description="cleanup module">
+    <delete dir="${aed_2016-2017.output.dir}"/>
+    <delete dir="${aed_2016-2017.testoutput.dir}"/>
+  </target>
+</project>
