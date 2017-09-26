@@ -34,7 +34,8 @@ public class BstOrderedTable<Key extends Comparable<? super Key>, Value> {
     }
 
     public BstOrderedTable(BstOrderedTable<Key, Value> bstOrderedTable) {
-        root = bstOrderedTable.root;
+       root = bstOrderedTable.root;
+
 
         checkInvariant();
     }

@@ -2,7 +2,6 @@ package pt.europeia.aed.Tester;
 
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import pt.europeia.aed.SortingTestTime.ResizingArrayTestTime;
 import pt.europeia.aed.book.chapter1.section3.iterable.ResizingArrayQueue;
 import pt.europeia.aed.files.Excel;
 
@@ -10,10 +9,11 @@ import java.io.IOException;
 
 public class ResizingArrayTester {
 
+
     private static ResizingArrayQueue<String> resizingArrayQueue;
 
 
-    public ResizingArrayTester() throws IOException, InvalidFormatException {
+    public ResizingArrayTester() throws IOException, InvalidFormatException, IOException {
         Excel excelResizingArray = new Excel("ResizingArray", "Resizing Arrays");
         warmup(excelResizingArray);
         testEnqueue(excelResizingArray);
@@ -64,8 +64,8 @@ public class ResizingArrayTester {
 
     }
 
-   /* public static void main(String[] args) throws IOException, InvalidFormatException {
+    public static void main(String[] args) throws IOException, InvalidFormatException {
         ResizingArrayTester main = new ResizingArrayTester();
-    }**/
+    }
 
 }

@@ -3,6 +3,8 @@ package pt.europeia.aed.Tester;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import pt.europeia.aed.SortingTestTime.InsertionSortBinarySearchTestTime;
 import pt.europeia.aed.SortingTestTime.InsertionSortTestTime;
+import pt.europeia.aed.SortingTestTime.InsertionWithMovesTestTime;
+import pt.europeia.aed.book.chapter2.section1.InsertionWithMoves;
 import pt.europeia.aed.files.Excel;
 import pt.europeia.aed.files.ExtractFilesGeneric;
 
@@ -92,11 +94,11 @@ public class InsertionSortTester {
 
     private void insertionWithMoves(Excel excel, Double[][] doubleArray) {
         for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
-            InsertionSortTestTime.performExperimentsFor(doubleArray[exponent], true, limit, excel);
+            InsertionWithMovesTestTime.performExperimentsFor(doubleArray[exponent], true, limit, excel);
 
         }
         for (int exponent = 0, limit = 2; exponent != 21; exponent++, limit *= 2) {
-            InsertionSortTestTime.performExperimentsFor(doubleArray[exponent], false, limit, excel);
+            InsertionWithMovesTestTime.performExperimentsFor(doubleArray[exponent], false, limit, excel);
         }
     }
 
@@ -109,6 +111,10 @@ public class InsertionSortTester {
             InsertionSortBinarySearchTestTime.performExperimentsFor(doubleArray[exponent], false, limit, excel);
         }
     }
+/*
+    public static void main(String[] args) {
 
+    }
+*/
 
 }
