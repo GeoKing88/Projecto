@@ -111,10 +111,13 @@ public class BstTestTimeDelete {
         return linkedHashMap;
     }
 
-    public static void main(String[] args) throws IOException, InvalidFormatException {
+   /* public static void main(String[] args) throws IOException, InvalidFormatException {
 
-        /*
-        ExtractFilesGeneric extractFilesGeneric = new ExtractFilesGeneric(20);
+
+
+
+
+        ExtractFilesGeneric2 extractFilesGeneric = new ExtractFilesGeneric2(20);
         Excel excelShuffle = new Excel("DeleteShuffle", "Shuffle");
 
         for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
@@ -135,8 +138,8 @@ public class BstTestTimeDelete {
             BstTestTimeDelete.performanceExperimentsForDelete(extractFilesGeneric.getSortedArray()[exponent], false, limit, excelSorted);
         }
         excelSorted.close();
-*/
-    }
+
+    }*/
 
 }
 

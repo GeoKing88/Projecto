@@ -4,10 +4,13 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import pt.europeia.aed.Stopwatch;
 import pt.europeia.aed.book.chapter3.section2.BstOrderedTable;
 import pt.europeia.aed.files.Excel;
-import pt.europeia.aed.files.ExtractFilesGeneric;
+import pt.europeia.aed.files.ExtractFiles;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
+import static java.lang.System.out;
 
 
 public class BstTestTimePut {
@@ -15,6 +18,7 @@ public class BstTestTimePut {
 
     public static final double timeBudgetPerExperiment = 10 /* seconds */;
     public static final double minimumTimePerContiguousRepetitions = 1e-5 /* seconds */;
+    static int arraySize = 0;
 
     public static double medianOf(final ArrayList<Double> values) {
         final int size = values.size();
@@ -32,6 +36,7 @@ public class BstTestTimePut {
         for (int i = 0; i < array.length; i++) {
             bst.put(array[i], "Benfica");
         }
+       arraySize = array.length;
     }
 
 
@@ -75,22 +80,50 @@ public class BstTestTimePut {
         if (!isWarmup)
             excel.writeDataTimes(limit, median, executionTimes.get(0), repetitions);
         System.out.println(
-                limit + "\t" + median + "\t" + repetitions);
+                limit + "\t" + median + "\t" + repetitions +"\t"+arraySize);
 
     }
+
+    /**
+     * This method was copy from  http://javatechniques.com/blog/faster-deep-copies-of-java-objects/
+     * <p>
+     * This permit to deep copy objects.
+     *
+     * @param orig
+     * @return object clone
+     */
+    private static Object copy(Object orig) {
+        Object obj = null;
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+            out.writeObject(orig);
+            out.flush();
+            out.close();
+            ObjectInputStream in = new ObjectInputStream(
+                    new ByteArrayInputStream(bos.toByteArray()));
+            obj = in.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+        return obj;
+    }
+
 
     public static void main(String[] args) throws IOException, InvalidFormatException {
 
 
-        ExtractFilesGeneric extractFilesGeneric = new ExtractFilesGeneric(20);
+        ExtractFiles extractFilesGeneric2 = new ExtractFiles(20);
 
         Excel excelShuffle = new Excel("PutShuffle", "Shuffle");
 
         for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
-            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric.getSuffleArray()[exponent], true, limit, excelShuffle);
+            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric2.getShuffle()[exponent], true, limit, excelShuffle);
         }
         for (int exponent = 0, limit = 2; exponent != 20; exponent++, limit *= 2) {
-            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric.getSuffleArray()[exponent], false, limit, excelShuffle);
+            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric2.getShuffle()[exponent], false, limit, excelShuffle);
         }
 
         excelShuffle.close();
@@ -98,10 +131,10 @@ public class BstTestTimePut {
 
         Excel excelSorted = new Excel("PutSorted", "Sorted");
         for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
-            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric.getSortedArray()[exponent], true, limit, excelSorted);
+            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric2.getSorted()[exponent], true, limit, excelSorted);
         }
         for (int exponent = 0, limit = 2; exponent != 20; exponent++, limit *= 2) {
-            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric.getSortedArray()[exponent], false, limit, excelSorted);
+            BstTestTimePut.performanceExperimentsForPut(extractFilesGeneric2.getSorted()[exponent], false, limit, excelSorted);
         }
         excelSorted.close();
     }

@@ -1,11 +1,11 @@
 package pt.europeia.aed.SortingTestTime;
 
 
-
 import pt.europeia.aed.Stopwatch;
 import pt.europeia.aed.book.chapter2.section3.Quick;
 import pt.europeia.aed.files.Excel;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import static java.lang.System.out;
@@ -13,10 +13,10 @@ import static java.lang.System.out;
 public class QuickSortTestTime {
 
 
-
-    public static final double timeBudgetPerExperiment = 10 /* seconds */;
+    public static final double timeBudgetPerExperiment = 0.1 /* seconds */;
 
     public static final double minimumTimePerContiguousRepetitions = 1e-5 /* seconds */;
+
 
     public static double medianOf(final ArrayList<Double> values) {
         final int size = values.size();
@@ -29,79 +29,101 @@ public class QuickSortTestTime {
             return values.get(size / 2);
     }
 
-
-    public static int contiguousRepetitionsFor(final Double[][] array) {
-
-        int repetitions = 0;
-        Stopwatch stopwatch = new Stopwatch();
-        do {
-            if (array.length <= repetitions) {
-                repetitions = 0;
-                break;
-            }
-            Quick.sort(array[repetitions]);
-            repetitions++;
-        } while (stopwatch.elapsedTime() < minimumTimePerContiguousRepetitions);
-        return repetitions;
-    }
-
-
-    public static double executionTimeFor(final Double[][] array, final int contiguousRepetitions) {
-        final Stopwatch stopwatch = new Stopwatch();
-        for (int i = 0; i != contiguousRepetitions; i++)
-            Quick.sort(array[i]);
-        return stopwatch.elapsedTime() / contiguousRepetitions;
-    }
-
-
-    public static void performExperimentsFor(final Double[] array, boolean isWarmup, final int limit, final Excel excel) {
-        int size = 8;
+    public static int contiguousRepetitionsFor(Double[][] doubles) {
         int contiguousRepetitions = 0;
+        final Stopwatch stopwatch = new Stopwatch();
         do {
-            Double[][] cloneArrays = cloneArrayToContiguousRepetitions(array, size*2);
-            contiguousRepetitions = contiguousRepetitionsFor(cloneArrays);
-        } while (contiguousRepetitions == 0);
+            if (doubles.length <= contiguousRepetitions) {
+                return 0;
+            }
+            Quick.sort(doubles[contiguousRepetitions]);
+            contiguousRepetitions++;
+        } while (stopwatch.elapsedTime() < minimumTimePerContiguousRepetitions);
+        return contiguousRepetitions;
+    }
 
-        Double[][] cloneArray = cloneArrayToContiguousRepetitions(array, contiguousRepetitions);
+
+    public static double executionTimeFor(final Double[][] doubleArray) {
+
+
+        final Stopwatch stopwatch = new Stopwatch();
+        for (int i = 0; i != doubleArray.length; i++) {
+            Quick.sort(doubleArray[i]);
+        }
+        return stopwatch.elapsedTime() / doubleArray.length;
+    }
+
+
+    public static void performExperimentsFor(final Double[] array, final int limit, final boolean isWarmup, final Excel excel) {
+
 
         final ArrayList<Double> executionTimes = new ArrayList<Double>();
-        final Stopwatch stopwatch = new Stopwatch();
-
-        long repetitions = 0;
+        int size = 8;
+        int contiguousRepetitions;
         do {
-            executionTimes.add(executionTimeFor(cloneArray, contiguousRepetitions));
+            Double[][] cloneArrays = cloneArrayToContiguousRepetitions(size * 2, array);
+            contiguousRepetitions = contiguousRepetitionsFor(cloneArrays);
+        } while (contiguousRepetitions == 0);
+        long repetitions = 0;
+        Double[][] cloneArrayToContiguousRepetitions = cloneArrayToContiguousRepetitions(contiguousRepetitions, array);
+        double time = 0;
+        do {
+            Double[][] arrayToTest = (Double[][]) copy(cloneArrayToContiguousRepetitions);
+            final Stopwatch stopwatch = new Stopwatch();
+            executionTimes.add(executionTimeFor(arrayToTest));
+            time += stopwatch.elapsedTime();
             repetitions++;
-        } while (stopwatch.elapsedTime() < timeBudgetPerExperiment);
+        } while (time < timeBudgetPerExperiment);
 
         final double median = medianOf(executionTimes);
 
         if (!isWarmup)
-            excel.writeDataTimes(limit, median, executionTimes.get(0), repetitions);
-        out.println(
-                limit + "\t" + median + "\t" + repetitions);
+            out.println(
+                    limit + "\t" + median + "\t" + repetitions + "\t");
+        excel.writeDataTimes(limit, median, executionTimes.get(0), repetitions);
+        /*-
+        out.println("Sum from 1 to " + limit + " = " + sum + " [" + median
+                + "s median time based on " + repetitions
+                + " repetitions of " + contiguousRepetitions
+                + " contiguous repetitions]");
+        */
     }
 
-    private static Double[][] cloneArrayToContiguousRepetitions(Double[] array, int size) {
+
+    private static Double[][] cloneArrayToContiguousRepetitions(int size, Double[] array) {
         Double[][] clone = new Double[size][];
         for (int i = 0; i < size; i++) {
-            clone[i] = array.clone();
+            clone[i] = (Double[]) copy(array);
         }
         return clone;
     }
 
-/*
-    public static void main (String[] args) throws IOException, InvalidFormatException {
-
-        ExtractFilesDouble extractFilesDouble = new ExtractFilesDouble();
-        Excel excel = new Excel("Testesda", "fas");
-
-        for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
-            InsertionSortTestTime.performanceRepetitionsFor(extractFilesDouble.getSortedArray()[exponent], true, excel, limit);
-
+    /**
+     * This method was copy from  http://javatechniques.com/blog/faster-deep-copies-of-java-objects/
+     * <p>
+     * This permit to deep copy objects.
+     *
+     * @param orig
+     * @return object clone
+     */
+    private static Object copy(Object orig) {
+        Object obj = null;
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+            out.writeObject(orig);
+            out.flush();
+            out.close();
+            ObjectInputStream in = new ObjectInputStream(
+                    new ByteArrayInputStream(bos.toByteArray()));
+            obj = in.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
         }
-        for (int exponent = 0, limit = 2; exponent != 21; exponent++, limit *= 2) {
-            InsertionSortTestTime.performanceRepetitionsFor(extractFilesDouble.getSortedArray()[exponent], false, excel, limit);
-        }
+        return obj;
+    }
 
-    }**/
+
 }

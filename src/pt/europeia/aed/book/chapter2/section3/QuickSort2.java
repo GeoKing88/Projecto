@@ -4,9 +4,9 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
-public final class InsertionSort {
+public final class QuickSort2 {
 
-    private InsertionSort() {
+    private QuickSort2() {
         throw new RuntimeException("Attempt to instantiate package-class");
     }
 

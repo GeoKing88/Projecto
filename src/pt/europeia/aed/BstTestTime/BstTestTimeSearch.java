@@ -5,7 +5,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import pt.europeia.aed.Stopwatch;
 import pt.europeia.aed.book.chapter3.section2.BstOrderedTable;
 import pt.europeia.aed.files.Excel;
-import pt.europeia.aed.files.ExtractFilesGeneric;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,18 +96,18 @@ public class BstTestTimeSearch {
         return randomIndex;
     }
 
-    public static void main(String[] args) throws IOException, InvalidFormatException {
+  /*  public static void main(String[] args) throws IOException, InvalidFormatException {
 
 
-        ExtractFilesGeneric extractFilesGeneric = new ExtractFilesGeneric(20);
+        ExtractFilesGeneric2 extractFilesGeneric2 = new ExtractFilesGeneric2(20);
 
         Excel excelShuffle = new Excel("SearchShuffle", "Shuffle");
 
         for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
-            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric.getSuffleArray()[exponent], true, limit, excelShuffle);
+            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric2.getSuffleArray()[exponent], true, limit, excelShuffle);
         }
         for (int exponent = 0, limit = 2; exponent != 20; exponent++, limit *= 2) {
-            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric.getSuffleArray()[exponent], false, limit, excelShuffle);
+            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric2.getSuffleArray()[exponent], false, limit, excelShuffle);
         }
 
         excelShuffle.close();
@@ -115,12 +115,12 @@ public class BstTestTimeSearch {
 
         Excel excelSorted = new Excel("SearchSorted", "Sorted");
         for (int exponent = 0, limit = 2; exponent != 8; exponent++, limit *= 2) {
-            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric.getSortedArray()[exponent], true, limit, excelShuffle);
+            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric2.getSortedArray()[exponent], true, limit, excelShuffle);
         }
         for (int exponent = 0, limit = 2; exponent != 20; exponent++, limit *= 2) {
-            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric.getSortedArray()[exponent], false, limit, excelShuffle);
+            BstTestTimeSearch.performExperimentsForSearch(extractFilesGeneric2.getSortedArray()[exponent], false, limit, excelShuffle);
         }
         excelSorted.close();
 
-    }
+    }*/
 }
